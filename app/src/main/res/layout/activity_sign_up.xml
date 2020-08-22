@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1E1B1B"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="ui.signup.SignUpActivity">
+
+    <TextView
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:background="#1E1B1B"
+        android:backgroundTint="#1E1B1B"
+        android:drawableTint="#ECE7E7"
+        android:foregroundTint="#C1B0B0"
+        android:shadowColor="#EAD8D8"
+        android:text="Sign Up"
+        android:textColor="#FFFFFF"
+        android:textSize="35dp" />
+
+    <EditText
+        android:id="@+id/usernameSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#FFFFFF"
+        android:focusable="true"
+        android:hint="Enter username"
+        android:textColorHint="#FFFFFF"
+        android:textColor="#FFFFFF"/>
+
+    <EditText
+        android:id="@+id/passwordSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usernameSignUp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#FDFCFC"
+        android:focusable="true"
+        android:hint="Enter password"
+        android:textColorHint="#FFFFFF"
+        android:textColor="#FFFFFF"
+        android:ems="10"
+        android:inputType="textPassword"
+        />
+
+    <EditText
+        android:id="@+id/userPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passwordSignUp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#FFFFFF"
+        android:focusable="true"
+        android:hint="Enter username"
+        android:textColorHint="#FFFFFF"
+        android:textColor="#FFFFFF"/>
+
+    <EditText
+        android:id="@+id/userEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userPhoneNumber"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#FFFFFF"
+        android:focusable="true"
+        android:hint="Enter username"
+        android:textColorHint="#FFFFFF"
+        android:textColor="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/signingUpButton"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:backgroundTint="#FFEAEFEF"
+        android:layout_below="@id/userEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/rounded_button"
+        android:text="Let's get started!" />
+
+
+</RelativeLayout>
