@@ -7,15 +7,20 @@ import androidx.lifecycle.ViewModel;
 public class LoginViewModel extends ViewModel {
 
 
-    private boolean isUserNameValid(String username) {
-        if (username == null) {
+    private boolean isEmailValid(String email) {
+        if (email == null) {
             return false;
         }
-        if (username.contains("@")) {
-            return Patterns.EMAIL_ADDRESS.matcher(username).matches();
+        if (email.contains("@")) {
+            return Patterns.EMAIL_ADDRESS.matcher(email).matches();
         } else {
-            return !username.trim().isEmpty();
+            return !email.trim().isEmpty();
         }
+    }
+
+    private boolean isEmailExistent(String email)
+    {
+        return true;
     }
 
     private boolean isPasswordValid(String password) {

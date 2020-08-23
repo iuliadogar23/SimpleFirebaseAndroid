@@ -13,9 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.simplefirebaseandroid.R;
 import com.example.simplefirebaseandroid.ui.signup.SignUpActivity;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     private LoginViewModel loginViewModel;
+    private EditText usernameEditText;
+    private EditText passwordEditText;
+    private Button login;
+    private Button loginGoogle;
+    private Button signUp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,11 +28,11 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
 
-        final EditText usernameEditText = findViewById(R.id.email);
-        final EditText passwordEditText = findViewById(R.id.password);
-        Button login = findViewById(R.id.loginButton);
-        Button loginGoogle = findViewById(R.id.customGoogleButton);
-        Button signUp = findViewById(R.id.signUpButton);
+        usernameEditText = findViewById(R.id.email);
+        passwordEditText = findViewById(R.id.password);
+        login = findViewById(R.id.loginButton);
+        loginGoogle = findViewById(R.id.customGoogleButton);
+        signUp = findViewById(R.id.signUpButton);
 
     }
 
@@ -41,6 +46,11 @@ public class LoginActivity extends AppCompatActivity {
 
         Intent signUpIntent = new Intent(getBaseContext(), SignUpActivity.class);
         startActivity(signUpIntent);
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 }
