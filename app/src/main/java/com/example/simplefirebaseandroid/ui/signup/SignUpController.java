@@ -1,16 +1,19 @@
 package com.example.simplefirebaseandroid.ui.signup;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.simplefirebaseandroid.data.model.User;
+import com.example.simplefirebaseandroid.ui.welcome.WelcomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpController {
@@ -26,10 +29,15 @@ public class SignUpController {
     public void createAccount(final Context context, FirebaseAuth firebaseAuth, final String username, final String password, final String phoneNumber, final String email) {
         String fieldsAreValidResponse = signUpService.fieldsAreValid(username, password, phoneNumber, email);
         if (fieldsAreValidResponse.equals("ok")) {
-            Toast.makeText(context, "Signing you up!", Toast.LENGTH_SHORT).show();
+            firebaseConnection(context, firebaseAuth, username, password, phoneNumber, email);
         } else
             Toast.makeText(context, fieldsAreValidResponse, Toast.LENGTH_LONG).show();
 
+
+    }
+
+    private void firebaseConnection(final Context context, FirebaseAuth firebaseAuth, final String username, final String password, final String phoneNumber, final String email)
+    {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -43,10 +51,11 @@ public class SignUpController {
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful())
-                                    {
+                                    if (task.isSuccessful()) {
                                         Toast.makeText(context, "Registration was succesfully made!", Toast.LENGTH_SHORT).show();
-                                    }else{
+                                        Intent welcome = new Intent(context, WelcomeActivity.class);
+                                        context.startActivity(welcome);
+                                    } else {
                                         Toast.makeText(context, "Oops! Something went wrong...", Toast.LENGTH_LONG).show();
                                     }
                                 }
@@ -54,8 +63,13 @@ public class SignUpController {
                             //updateUI(user);
                         } else {
                             Log.w(TAG, "createUserWithEmail: failure", task.getException());
-                            Toast.makeText(context, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                Toast.makeText(context, "This email is already registered", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
                         }
 
 

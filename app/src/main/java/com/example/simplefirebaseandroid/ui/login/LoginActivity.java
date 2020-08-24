@@ -5,22 +5,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.simplefirebaseandroid.R;
 import com.example.simplefirebaseandroid.ui.signup.SignUpActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private LoginViewModel loginViewModel;
     private EditText usernameEditText;
     private EditText passwordEditText;
     private Button login;
     private Button loginGoogle;
-    private Button signUp;
+    private ProgressBar progressBar;
+
+    private FirebaseAuth mAuth;
+    private LoginController loginController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,21 +34,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         passwordEditText = findViewById(R.id.password);
         login = findViewById(R.id.loginButton);
         loginGoogle = findViewById(R.id.customGoogleButton);
-        signUp = findViewById(R.id.signUpButton);
+        progressBar = findViewById(R.id.loginProgressBar);
+        progressBar.setVisibility(View.INVISIBLE);
+
+        mAuth = FirebaseAuth.getInstance();
+        loginController = new LoginController();
 
     }
 
-
-    private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
-    }
-
-    public void signUp(View view)
-    {
+    public void signUp(View view) {
 
         Intent signUpIntent = new Intent(getBaseContext(), SignUpActivity.class);
         startActivity(signUpIntent);
 
+    }
+
+    public void login(View view) {
+        loginController.loginAccount(getApplicationContext(), mAuth, usernameEditText.getText().toString(), passwordEditText.getText().toString(), progressBar);
     }
 
     @Override

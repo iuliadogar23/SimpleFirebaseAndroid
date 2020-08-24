@@ -71,6 +71,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
         android:background="@drawable/rounded_button"
+        android:onClick="login"
         android:text="Login" />
 
     <Button
@@ -111,5 +112,13 @@
         android:background="@drawable/rounded_button"
         android:onClick="signUp"
         android:text="Sign Up" />
+
+    <ProgressBar
+        android:id="@+id/loginProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>
