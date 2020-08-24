@@ -74,20 +74,17 @@
         android:onClick="login"
         android:text="Login" />
 
-    <Button
+    <com.google.android.gms.common.SignInButton
         android:id="@+id/customGoogleButton"
-        android:layout_width="300dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/rounded_button"
-        android:backgroundTint="#FFEAEFEF"
-        android:text="Continue with Google"
-        android:layout_marginTop="15dp"
+        android:layout_width="330dp"
+        android:layout_height="55dp"
         android:layout_below="@id/loginButton"
         android:layout_centerHorizontal="true"
-        android:paddingLeft="15dp"
-        android:textAlignment="center"
-        />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="10dp"
+        android:onClick="loginGoogle"
+        android:textAlignment="center" />
 
 
     <TextView
