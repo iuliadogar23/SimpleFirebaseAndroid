@@ -73,6 +73,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+
+        if(mAuth.getCurrentUser() != null)
+        {
+            Toast.makeText(getApplicationContext(), "Already logged in!", Toast.LENGTH_SHORT).show();
+            Intent welcome = new Intent(this, WelcomeActivity.class);
+            startActivity(welcome);
+        }
+    }
+
     public void signUp(View view) {
 
         Intent signUpIntent = new Intent(getBaseContext(), SignUpActivity.class);

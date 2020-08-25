@@ -1,5 +1,6 @@
 package com.example.simplefirebaseandroid.ui.signup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.simplefirebaseandroid.R;
+import com.example.simplefirebaseandroid.ui.welcome.WelcomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -45,6 +47,8 @@ public class SignUpActivity extends AppCompatActivity {
         if(mAuth.getCurrentUser() != null)
         {
             Toast.makeText(getApplicationContext(), "Already logged in!", Toast.LENGTH_SHORT).show();
+            Intent welcome = new Intent(this, WelcomeActivity.class);
+            startActivity(welcome);
         }
     }
 
