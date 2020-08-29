@@ -5,20 +5,22 @@ package com.example.simplefirebaseandroid.data.model;
  */
 public class User {
 
-    private String userId;
+    private String username;
     private String displayName;
     private String phoneNumber;
     private String email;
+    private String id;
 
-    public User(String userId, String displayName, String phoneNumber, String email) {
-        this.userId = userId;
+    public User(String username, String displayName, String phoneNumber, String email, String id) {
+        this.username = username;
         this.displayName = displayName;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
     public String getDisplayName() {
@@ -31,5 +33,9 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getId() {
+        return id;
     }
 }

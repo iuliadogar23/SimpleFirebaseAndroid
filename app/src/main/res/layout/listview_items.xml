@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:id="@+id/container_movies"
+    >
+
+    <TextView
+        android:id="@+id/movieTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="asdd"
+        />
+    <TextView
+        android:id="@+id/movieYear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="2020"
+        android:textSize="15dp"
+        />
+
+</LinearLayout>

@@ -45,7 +45,7 @@ public class SignUpController {
 
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail: success");
-                            User user = new User(username, password, phoneNumber, email);
+                            User user = new User(username, password, phoneNumber, email, null);
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {

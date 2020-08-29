@@ -1,10 +1,10 @@
 package com.example.simplefirebaseandroid.ui.welcome;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.simplefirebaseandroid.R;
 import com.example.simplefirebaseandroid.ui.main.MainActivity;
