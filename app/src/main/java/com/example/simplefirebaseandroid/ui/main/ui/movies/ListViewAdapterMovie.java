@@ -4,10 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,8 +16,6 @@ import com.example.simplefirebaseandroid.data.model.Movie;
 import java.util.List;
 
 public class ListViewAdapterMovie extends ArrayAdapter<Movie> {
-
-    private static final String TAG = "ListViewAdapterMovie";
 
     private Context mContext;
     int mResource;

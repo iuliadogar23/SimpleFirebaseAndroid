@@ -1,20 +1,17 @@
 package com.example.simplefirebaseandroid.ui.main.ui.detail;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.example.simplefirebaseandroid.R;
 import com.example.simplefirebaseandroid.data.model.Movie;
@@ -33,16 +30,23 @@ public class MovieDetailsFragment extends Fragment {
 
     TextView showCategory, showYear, showDuration, showDescription;
 
-    public static MovieDetailsFragment newInstance() {
-        return new MovieDetailsFragment();
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.movie_details_fragment, container, false);
 
         movie = (Movie) getArguments().getSerializable("movie");
+        setPartsForFragment(view);
+
+        populateMovieWithValues();
+        deleteMovie(movie.getTitle());
+        updateMovie(movie);
+
+        return view;
+    }
+
+    private void setPartsForFragment(View view)
+    {
         collapsingToolbarLayout = view.findViewById(R.id.collapsing_toolbar_id);
 
         showCategory = view.findViewById(R.id.show_movie_type);
@@ -51,12 +55,6 @@ public class MovieDetailsFragment extends Fragment {
         showDescription = view.findViewById(R.id.movie_description);
         deleteButton = view.findViewById(R.id.delete_button);
         editButton = view.findViewById(R.id.edit_button);
-
-        populateMovieWithValues();
-        deleteMovie(movie.getTitle());
-        updateMovie(movie);
-
-        return view;
     }
 
     @Override
@@ -77,27 +75,21 @@ public class MovieDetailsFragment extends Fragment {
 
     private void deleteMovie(String title)
     {
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                movieRequest.deleteMovie(title, getContext());
-                NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_movieDetailsFragment_to_navigation_home);
-            }
+        deleteButton.setOnClickListener(v -> {
+            movieRequest.deleteMovie(title, getContext());
+            NavController navController = Navigation.findNavController(v);
+            navController.navigate(R.id.action_movieDetailsFragment_to_navigation_home);
         });
     }
 
     private void updateMovie(Movie movie)
     {
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController = Navigation.findNavController(v);
-                Bundle bundle = new Bundle();
-                bundle.putString("action", "update");
-                bundle.putSerializable("movie", movie);
-                navController.navigate(R.id.action_movieDetailsFragment_to_alterMovieFragment, bundle);
-            }
+        editButton.setOnClickListener(v -> {
+            NavController navController = Navigation.findNavController(v);
+            Bundle bundle = new Bundle();
+            bundle.putString("action", "update");
+            bundle.putSerializable("movie", movie);
+            navController.navigate(R.id.action_movieDetailsFragment_to_alterMovieFragment, bundle);
         });
     }
 

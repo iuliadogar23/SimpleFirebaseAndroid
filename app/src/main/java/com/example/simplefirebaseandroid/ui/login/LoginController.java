@@ -26,17 +26,13 @@ public class LoginController {
         String fieldsAreValidResponse = loginService.fieldsAreValid(email, password);
         if (fieldsAreValidResponse.equals("ok")) {
             progressBar.setVisibility(View.VISIBLE);
-            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    progressBar.setVisibility(View.INVISIBLE);
-                    if (task.isSuccessful()) {
-                        Intent welcome = new Intent(context, WelcomeActivity.class);
-                        context.startActivity(welcome);
-                    } else {
-                        Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                progressBar.setVisibility(View.INVISIBLE);
+                if (task.isSuccessful()) {
+                    Intent welcome = new Intent(context, WelcomeActivity.class);
+                    context.startActivity(welcome);
+                } else {
+                    Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         } else

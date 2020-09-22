@@ -37,15 +37,22 @@ public class AlterMovieFragment extends Fragment {
     String action;
     Movie movie;
 
-    public static AlterMovieFragment newInstance() {
-        return new AlterMovieFragment();
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.alter_movie_fragment, container, false);
 
+        setPartsForLayout(view);
+
+        changeBehaviourForAction(action);
+        setCategoryForSpinner(category);
+        finishButton.setOnClickListener(v -> alterChanges(view, action));
+
+        return view;
+    }
+
+    private void setPartsForLayout(View view)
+    {
         title = view.findViewById(R.id.title_edittext);
         description = view.findViewById(R.id.description_edit_text);
         category = view.findViewById(R.id.category_spinner);
@@ -53,17 +60,6 @@ public class AlterMovieFragment extends Fragment {
         duration = view.findViewById(R.id.duration_edit_text);
         finishButton = view.findViewById(R.id.finish_button);
         action = getArguments().getString("action");
-
-        changeBehaviourForAction(action);
-        setCategoryForSpinner(category);
-        finishButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alterChanges(view, action);
-            }
-        });
-
-        return view;
     }
 
     private void changeBehaviourForAction(String action) {
@@ -92,10 +88,6 @@ public class AlterMovieFragment extends Fragment {
             spinner.setSelection(adapter.getPosition(movie.getCategory()));
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
 
     public void alterChanges(View view, String action) {
         Movie movie = new Movie();

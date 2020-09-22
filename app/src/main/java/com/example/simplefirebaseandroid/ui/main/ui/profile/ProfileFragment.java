@@ -32,13 +32,10 @@ public class ProfileFragment extends Fragment {
     }
 
     public void signOut() {
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                getActivity().finish();
-                startActivity(new Intent(getActivity(), LoginActivity.class));
-            }
+        signOut.setOnClickListener(v -> {
+            mAuth.signOut();
+            getActivity().finish();
+            startActivity(new Intent(getActivity(), LoginActivity.class));
         });
 
 

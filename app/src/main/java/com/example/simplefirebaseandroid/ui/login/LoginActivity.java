@@ -31,7 +31,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = "LoginActivity";
     private static final int RC_SIGN_IN = 1;
 
     private EditText usernameEditText;
@@ -64,12 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
-        loginGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginGoogle(v);
-            }
-        });
+        loginGoogle.setOnClickListener(v -> loginGoogle(v));
 
     }
 
