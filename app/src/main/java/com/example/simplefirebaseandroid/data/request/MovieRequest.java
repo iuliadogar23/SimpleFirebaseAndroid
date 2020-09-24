@@ -32,7 +32,7 @@ public class MovieRequest {
         return null;
     }
 
-    public void saveMovie(Movie movie, Context context)
+    public ANResponse saveMovie(Movie movie)
     {
         Gson gson = new Gson();
         JsonParser jsonParser = new JsonParser();
@@ -43,15 +43,10 @@ public class MovieRequest {
                 .addApplicationJsonBody(jsonObject)
                 .setPriority(Priority.HIGH)
                 .build();
-        ANResponse response = request.executeForString();
-        if (response.isSuccess())
-            Toast.makeText(context, "The movie was saved successfully", Toast.LENGTH_SHORT).show();
-        else {
-            Toast.makeText(context, "The movie was unable to be saved", Toast.LENGTH_SHORT).show();
-        }
+        return request.executeForString();
     }
 
-    public void updateMovie(Movie movie, Context context)
+    public ANResponse updateMovie(Movie movie)
     {
         Gson gson = new Gson();
         JsonParser jsonParser = new JsonParser();
@@ -63,27 +58,33 @@ public class MovieRequest {
                 .addApplicationJsonBody(jsonObject)
                 .setPriority(Priority.HIGH)
                 .build();
-        ANResponse response = request.executeForString();
-        if (response.isSuccess())
-            Toast.makeText(context, "The movie was updated successfully", Toast.LENGTH_SHORT).show();
-        else {
-            Toast.makeText(context, "The movie was unable to be updated", Toast.LENGTH_SHORT).show();
-        }
+        return request.executeForString();
+
     }
 
-    public void deleteMovie(String movieTitle, Context context)
+    public ANResponse deleteMovie(String movieTitle)
     {
 
         ANRequest request = AndroidNetworking.delete(Constant.LOCALHOST+"/deleteMovie?title={title}")
                 .addPathParameter("title", movieTitle)
                 .setPriority(Priority.HIGH)
                 .build();
-        ANResponse response= request.executeForObject(boolean.class);
+        return request.executeForObject(boolean.class);
+    }
+
+    public Movie getMovie(String title)
+    {
+        ANRequest request = AndroidNetworking.get(Constant.LOCALHOST+"/getMovieDetails?title={title}")
+                .addPathParameter("title", title)
+                .setPriority(Priority.HIGH)
+                .build();
+        ANResponse response = request.executeForObject(Movie.class);
         if (response.isSuccess())
-            Toast.makeText(context, "The movie was deleted successfully", Toast.LENGTH_SHORT).show();
+            return (Movie) response.getResult();
         else {
-            Toast.makeText(context, "The movie was unable to be deleted", Toast.LENGTH_SHORT).show();
+            Log.println(Log.ERROR, "getAllMovies", String.valueOf(response.getError()));
         }
+        return null;
     }
 
 }

@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.androidnetworking.common.ANResponse;
 import com.example.simplefirebaseandroid.R;
 import com.example.simplefirebaseandroid.data.model.Movie;
 import com.example.simplefirebaseandroid.data.request.MovieRequest;
@@ -118,9 +119,23 @@ public class AlterMovieFragment extends Fragment {
             Toast.makeText(getActivity().getApplicationContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
         if (checked) {
             if (action.equals("add"))
-                movieRequest.saveMovie(movie, getActivity().getApplicationContext());
+                {
+                    ANResponse response = movieRequest.saveMovie(movie);
+                    if (response.isSuccess())
+                        Toast.makeText(getActivity().getApplicationContext(), "The movie was saved successfully", Toast.LENGTH_SHORT).show();
+                    else {
+                        Toast.makeText(getActivity().getApplicationContext(), "The movie was unable to be saved", Toast.LENGTH_SHORT).show();
+                    }
+                }
             else
-                movieRequest.updateMovie(movie, getActivity().getApplicationContext());
+                {
+                    ANResponse response = movieRequest.updateMovie(movie);
+                    if (response.isSuccess())
+                        Toast.makeText(getActivity().getApplicationContext(), "The movie was updated successfully", Toast.LENGTH_SHORT).show();
+                    else {
+                        Toast.makeText(getActivity().getApplicationContext(), "The movie was unable to be updated", Toast.LENGTH_SHORT).show();
+                    }
+                }
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.action_alterMovieFragment_to_navigation_home);
         }

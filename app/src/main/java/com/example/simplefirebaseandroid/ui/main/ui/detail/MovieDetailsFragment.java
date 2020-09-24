@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.androidnetworking.common.ANResponse;
 import com.example.simplefirebaseandroid.R;
 import com.example.simplefirebaseandroid.data.model.Movie;
 import com.example.simplefirebaseandroid.data.request.MovieRequest;
@@ -76,7 +78,12 @@ public class MovieDetailsFragment extends Fragment {
     private void deleteMovie(String title)
     {
         deleteButton.setOnClickListener(v -> {
-            movieRequest.deleteMovie(title, getContext());
+            ANResponse response = movieRequest.deleteMovie(title);
+            if (response.isSuccess())
+                Toast.makeText(getContext(), "The movie was deleted successfully", Toast.LENGTH_SHORT).show();
+            else {
+                Toast.makeText(getContext(), "The movie was unable to be deleted", Toast.LENGTH_SHORT).show();
+            }
             NavController navController = Navigation.findNavController(v);
             navController.navigate(R.id.action_movieDetailsFragment_to_navigation_home);
         });

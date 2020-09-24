@@ -47,4 +47,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.0.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
+    androidTestCompile 'com.android.support.test:runner:0.5'
 }
